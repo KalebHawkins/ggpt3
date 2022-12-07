@@ -92,11 +92,11 @@ func mockV1ModelsResponse(t *testing.T, w http.ResponseWriter, r *http.Request) 
 
 	switch r.URL.Path {
 	case "/models":
-		resp, err := os.ReadFile("testdata/models.json")
+		resp, err := os.ReadFile("testdata/modelsResponse.json")
 		assert.NoError(t, err)
 		w.Write(resp)
 	case "/models/model-id-0":
-		resp, err := os.ReadFile("testdata/model.json")
+		resp, err := os.ReadFile("testdata/modelResponse.json")
 		assert.NoError(t, err)
 		w.Write(resp)
 	}
