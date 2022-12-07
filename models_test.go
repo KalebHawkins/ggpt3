@@ -16,7 +16,7 @@ func TestModels(t *testing.T) {
 		{
 			name: "WithoutErr",
 			expResponse: &ModelResponse{
-				Data: []Data{
+				Data: []data{
 					{
 						Id:      "model-id-0",
 						Object:  "model",
@@ -73,7 +73,7 @@ func TestModel(t *testing.T) {
 		{
 			name: "WithoutErr",
 			expResponse: &ModelResponse{
-				Data: []Data{
+				Data: []data{
 					{
 						Id:      "model-id-0",
 						Object:  "model",

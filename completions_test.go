@@ -22,7 +22,7 @@ func TestRequestCompletion(t *testing.T) {
 				Object:  "text_completion",
 				Created: 1589478378,
 				Model:   "text-davinci-003",
-				Choices: []Choice{
+				Choices: []choice{
 					{
 						Text:         "\n\nThis is indeed a test",
 						Index:        0,
@@ -30,7 +30,7 @@ func TestRequestCompletion(t *testing.T) {
 						FinishReason: "length",
 					},
 				},
-				Usage: Usage{
+				Usage: usage{
 					PromptTokens:     5,
 					CompletionTokens: 7,
 					TotalTokens:      12,

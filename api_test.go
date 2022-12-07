@@ -59,6 +59,8 @@ func startTestServer(t *testing.T) *httptest.Server {
 			mockV1ModelsResponse(t, w, r)
 		case "/completions":
 			mockV1CompletionResponse(t, w, r)
+		case "/edits":
+			mockV1EditsRequest(t, w, r)
 		}
 	}))
 }
@@ -127,4 +129,16 @@ func mockV1ApiKeyUndefined(t *testing.T, w http.ResponseWriter, r *http.Request)
 	}
 
 	return false
+}
+
+func mockV1EditsRequest(t *testing.T, w http.ResponseWriter, r *http.Request) {
+	t.Helper()
+
+	if mockV1ApiKeyUndefined(t, w, r) {
+		return
+	}
+
+	resp, err := os.ReadFile("testdata/editsResponse.json")
+	assert.NoError(t, err)
+	w.Write(resp)
 }

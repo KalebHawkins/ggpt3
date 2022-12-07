@@ -54,6 +54,8 @@ const (
 	// Almost as capable as Davinci Codex, but slightly faster.
 	// This speed advantage may make it preferable for real-time applications.
 	CodexCodeCushman001 = "code-cushman-001"
+
+	TextDavinciEdit001 = "text-davinci-edit-001"
 )
 
 // While Davinci is generally the most capable, the other models can perform certain tasks
@@ -61,32 +63,6 @@ const (
 // perform many of the same tasks as Davinci, but faster and for 1/10th the cost.
 
 // The main GPT-3 models are meant to be used with the text completion endpoint.
-
-type Permission struct {
-	Id                  string  `json:"id"`
-	Object              string  `json:"object"`
-	Created             int     `json:"created"`
-	AllowCreateEngine   bool    `json:"allow_create_engine"`
-	AllowSampling       bool    `json:"allow_sampling"`
-	AllowLogProbs       bool    `json:"allow_logprobs"`
-	AllowSearchIndicies bool    `json:"allow_search_indices"`
-	AllowView           bool    `json:"allow_view"`
-	AllowFineTuning     bool    `json:"allow_fine_tuning"`
-	Organization        string  `json:"organization"`
-	Group               *string `json:"group"`
-	IsBlocking          bool    `json:"is_blocking"`
-}
-
-type Data struct {
-	Id         string       `json:"id"`
-	Object     string       `json:"object"`
-	OwnedBy    string       `json:"owned_by"`
-	Permission []Permission `json:"permission"`
-}
-
-type ModelResponse struct {
-	Data []Data `json:"data"`
-}
 
 // Models lists the currently available models, and provides basic information about each one such as the owner and availability.
 func (c *Client) Models(ctx context.Context) (*ModelResponse, error) {
