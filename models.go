@@ -66,7 +66,7 @@ const (
 
 // Models lists the currently available models, and provides basic information about each one such as the owner and availability.
 func (c *Client) Models(ctx context.Context) (*ModelResponse, error) {
-	req, err := c.newRequest(ctx, http.MethodGet, "/models", nil)
+	req, err := c.newRequest(ctx, http.MethodGet, nil, "/models", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ func (c *Client) Models(ctx context.Context) (*ModelResponse, error) {
 
 // Model retrieves a model instance, providing basic information about the model such as the owner and permissioning.
 func (c *Client) Model(ctx context.Context, model string) (*ModelResponse, error) {
-	req, err := c.newRequest(ctx, http.MethodGet, fmt.Sprintf("/models/%s", model), nil)
+	req, err := c.newRequest(ctx, http.MethodGet, nil, fmt.Sprintf("/models/%s", model), nil)
 	if err != nil {
 		return nil, err
 	}

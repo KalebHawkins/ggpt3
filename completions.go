@@ -7,7 +7,7 @@ import (
 
 // RequestCompletion creates a completion for the provided prompt and parameters
 func (c *Client) RequestCompletion(ctx context.Context, cr *CompletionRequest) (*CompletionResponse, error) {
-	req, err := c.newRequest(ctx, http.MethodPost, "/completions", cr)
+	req, err := c.newRequest(ctx, http.MethodPost, nil, "/completions", cr)
 	if err != nil {
 		return nil, err
 	}

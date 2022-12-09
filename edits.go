@@ -6,7 +6,7 @@ import (
 )
 
 func (c *Client) RequestEdits(ctx context.Context, er *EditsRequest) (*EditsResponse, error) {
-	req, err := c.newRequest(ctx, http.MethodPost, "/edits", er)
+	req, err := c.newRequest(ctx, http.MethodPost, nil, "/edits", er)
 	if err != nil {
 		return nil, err
 	}

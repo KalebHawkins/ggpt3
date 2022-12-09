@@ -23,6 +23,12 @@ type EditsResponse struct {
 	Usage   usage    `json:"usage"`
 }
 
+// ImageResponse represents a response from the images endpoint.
+type ImageResponse struct {
+	Created int
+	Data    []data
+}
+
 type permission struct {
 	Id                  string  `json:"id"`
 	Object              string  `json:"object"`
@@ -43,6 +49,7 @@ type data struct {
 	Object     string       `json:"object"`
 	OwnedBy    string       `json:"owned_by"`
 	Permission []permission `json:"permission"`
+	Url        string       `json:"url"`
 }
 
 type choice struct {

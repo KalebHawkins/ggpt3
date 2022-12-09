@@ -117,3 +117,29 @@ type EditsRequest struct {
 	// We generally recommend altering this or `temperature` but not both.
 	TopP float64 `json:"top_p"`
 }
+
+// ImageRequest represent a request body for the image endpoint.
+type ImageRequest struct {
+	// The image to edit. Must be a valid PNG file, less than 4MB, and square.
+	// If mask is not provided, image must have transparency, which will be used as the mask.
+	Image string `json:"image"`
+
+	// An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where
+	// image should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as image.
+	Mask string `json:"mask"`
+
+	// A text description of the desired image(s). The maximum length is 1000 characters.
+	Prompt string `json:"prompt"`
+
+	// The number of images to generate. Must be between 1 and 10.
+	N int `json:"n"`
+
+	// The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024
+	Size string `json:"size"`
+
+	// The format in which the generated images are returned. Must be one of url or b64_json.
+	ResponseFormat string `json:"response_format"`
+
+	// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
+	User string `json:"user"`
+}

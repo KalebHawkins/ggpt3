@@ -6,7 +6,9 @@
 
 - [x] Models API
 - [x] Edits API
-- [ ] Images API
+- [x] Images API
+  - [x] Images Edits
+  - [x] Images Variations
 - [ ] Embedding API
 - [ ] Files API
   - [ ] List
@@ -17,3 +19,5 @@
 - [ ] Fine-Tunes API
 - [ ] Moderation API
 - [ ] Engines API
+
+# TODO
