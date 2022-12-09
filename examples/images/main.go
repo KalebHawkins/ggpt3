@@ -1,3 +1,6 @@
+//go:build example
+// +build example
+
 package main
 
 import (
@@ -19,7 +22,7 @@ func main() {
 		Size:  "500x500",
 	}
 
-	resp, err := c.RequestImageVariation(context.Background(), ir)
+	resp, err := c.RequestImageVariations(context.Background(), ir)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

@@ -2,6 +2,7 @@ package ggpt3
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 )
 
@@ -17,6 +18,13 @@ func (c *Client) RequestImages(ctx context.Context, ir *ImageRequest) (*ImageRes
 }
 
 func (c *Client) RequestImageEdits(ctx context.Context, ir *ImageRequest) (*ImageResponse, error) {
+	if ir.Image == "" {
+		return nil, fmt.Errorf("image is a required field for an edits request")
+	}
+	if ir.Prompt == "" {
+		return nil, fmt.Errorf("prompt is a required field for an edits request")
+	}
+
 	headers := make(http.Header)
 	headers.Set("Content-Type", "multipart/form-data")
 
@@ -31,8 +39,13 @@ func (c *Client) RequestImageEdits(ctx context.Context, ir *ImageRequest) (*Imag
 }
 
 func (c *Client) RequestImageVariations(ctx context.Context, ir *ImageRequest) (*ImageResponse, error) {
+	if ir.Image == "" {
+		return nil, fmt.Errorf("image is a required field for a variation request")
+	}
+
 	headers := make(http.Header)
 	headers.Set("Content-Type", "multipart/form-data")
+
 	req, err := c.newRequest(ctx, http.MethodPost, headers, "/images/variations", ir)
 	if err != nil {
 		return nil, err

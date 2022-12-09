@@ -50,6 +50,7 @@ type data struct {
 	OwnedBy    string       `json:"owned_by"`
 	Permission []permission `json:"permission"`
 	Url        string       `json:"url"`
+	B64        string       `json:"b64_json"`
 }
 
 type choice struct {

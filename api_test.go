@@ -61,6 +61,8 @@ func startTestServer(t *testing.T) *httptest.Server {
 			mockV1CompletionResponse(t, w, r)
 		case "/edits":
 			mockV1EditsRequest(t, w, r)
+		case "/images/generations", "/images/edits", "/images/variations":
+			mockV1Images(t, w, r)
 		}
 	}))
 }
@@ -132,4 +134,32 @@ func mockV1EditsRequest(t *testing.T, w http.ResponseWriter, r *http.Request) {
 	resp, err := os.ReadFile("testdata/editsResponse.json")
 	assert.NoError(t, err)
 	w.Write(resp)
+}
+
+func mockV1Images(t *testing.T, w http.ResponseWriter, r *http.Request) {
+	t.Helper()
+
+	if mockV1ApiKeyUndefined(t, w, r) {
+		return
+	}
+
+	if r.Header.Get("Content-Type") == "multipart/form-data" {
+		err := r.ParseMultipartForm(4000000)
+		assert.NoError(t, err)
+	}
+
+	switch r.URL.Path {
+	case "/images/generations":
+		resp, err := os.ReadFile("testdata/imagesResponse.json")
+		assert.NoError(t, err)
+		w.Write(resp)
+	case "/images/edits":
+		resp, err := os.ReadFile("testdata/imagesResponse.json")
+		assert.NoError(t, err)
+		w.Write(resp)
+	case "/images/variations":
+		resp, err := os.ReadFile("testdata/imagesResponse.json")
+		assert.NoError(t, err)
+		w.Write(resp)
+	}
 }
