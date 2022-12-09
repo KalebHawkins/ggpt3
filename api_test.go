@@ -68,19 +68,27 @@ func startTestServer(t *testing.T) *httptest.Server {
 func mockV1Response(t *testing.T, w http.ResponseWriter, r *http.Request) {
 	t.Helper()
 
-	expectedResponse := ErrorResponse{
-		Error: &Error{
-			Message: "Invalid URL (GET /v1)",
-			Type:    "invalid_request_error",
-			Param:   nil,
-			Code:    nil,
-		},
+	resp, err := os.ReadFile("testdata/err404.json")
+	assert.NoError(t, err)
+	w.WriteHeader(http.StatusNotFound)
+	w.Write(resp)
+}
+
+func mockV1ApiKeyUndefined(t *testing.T, w http.ResponseWriter, r *http.Request) bool {
+	t.Helper()
+
+	authKey := r.Header.Get("Authorization")
+
+	if authKey != fmt.Sprintf("Bearer %s", testApiKey) {
+		resp, err := os.ReadFile("testdata/error.json")
+		assert.NoError(t, err)
+
+		w.WriteHeader(http.StatusUnauthorized)
+		w.Write(resp)
+		return true
 	}
 
-	w.WriteHeader(http.StatusNotFound)
-	jsonResp, err := json.Marshal(expectedResponse)
-	assert.NoError(t, err)
-	w.Write(jsonResp)
+	return false
 }
 
 func mockV1ModelsResponse(t *testing.T, w http.ResponseWriter, r *http.Request) {
@@ -112,23 +120,6 @@ func mockV1CompletionResponse(t *testing.T, w http.ResponseWriter, r *http.Reque
 	resp, err := os.ReadFile("testdata/completionResponse.json")
 	assert.NoError(t, err)
 	w.Write(resp)
-}
-
-func mockV1ApiKeyUndefined(t *testing.T, w http.ResponseWriter, r *http.Request) bool {
-	t.Helper()
-
-	authKey := r.Header.Get("Authorization")
-
-	if authKey != fmt.Sprintf("Bearer %s", testApiKey) {
-		resp, err := os.ReadFile("testdata/error.json")
-		assert.NoError(t, err)
-
-		w.WriteHeader(http.StatusUnauthorized)
-		w.Write(resp)
-		return true
-	}
-
-	return false
 }
 
 func mockV1EditsRequest(t *testing.T, w http.ResponseWriter, r *http.Request) {

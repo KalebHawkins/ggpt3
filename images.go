@@ -16,7 +16,7 @@ func (c *Client) RequestImages(ctx context.Context, ir *ImageRequest) (*ImageRes
 	return &iResp, err
 }
 
-func (c *Client) RequestImageEdit(ctx context.Context, ir *ImageRequest) (*ImageResponse, error) {
+func (c *Client) RequestImageEdits(ctx context.Context, ir *ImageRequest) (*ImageResponse, error) {
 	headers := make(http.Header)
 	headers.Set("Content-Type", "multipart/form-data")
 
@@ -30,7 +30,7 @@ func (c *Client) RequestImageEdit(ctx context.Context, ir *ImageRequest) (*Image
 	return &iResp, err
 }
 
-func (c *Client) RequestImageVariation(ctx context.Context, ir *ImageRequest) (*ImageResponse, error) {
+func (c *Client) RequestImageVariations(ctx context.Context, ir *ImageRequest) (*ImageResponse, error) {
 	headers := make(http.Header)
 	headers.Set("Content-Type", "multipart/form-data")
 	req, err := c.newRequest(ctx, http.MethodPost, headers, "/images/variations", ir)
