@@ -63,6 +63,8 @@ func startTestServer(t *testing.T) *httptest.Server {
 			mockV1EditsRequest(t, w, r)
 		case "/images/generations", "/images/edits", "/images/variations":
 			mockV1Images(t, w, r)
+		case "/embeddings":
+			mockV1Embeddings(t, w, r)
 		}
 	}))
 }
@@ -162,4 +164,16 @@ func mockV1Images(t *testing.T, w http.ResponseWriter, r *http.Request) {
 		assert.NoError(t, err)
 		w.Write(resp)
 	}
+}
+
+func mockV1Embeddings(t *testing.T, w http.ResponseWriter, r *http.Request) {
+	t.Helper()
+
+	if mockV1ApiKeyUndefined(t, w, r) {
+		return
+	}
+
+	eResp, err := os.ReadFile("testdata/embeddingsResponse.json")
+	assert.NoError(t, err)
+	w.Write(eResp)
 }

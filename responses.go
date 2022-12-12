@@ -29,6 +29,13 @@ type ImageResponse struct {
 	Data    []data
 }
 
+// EmbeddingsResponse represents a response from the embeddings endpoint.
+type EmbeddingsResponse struct {
+	Object string
+	Data   []data
+	Usage  usage
+}
+
 type permission struct {
 	Id                  string  `json:"id"`
 	Object              string  `json:"object"`
@@ -51,6 +58,8 @@ type data struct {
 	Permission []permission `json:"permission"`
 	Url        string       `json:"url"`
 	B64        string       `json:"b64_json"`
+	Embedding  []float64    `json:"embedding"`
+	Index      int          `json:"index"`
 }
 
 type choice struct {

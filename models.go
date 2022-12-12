@@ -55,7 +55,8 @@ const (
 	// This speed advantage may make it preferable for real-time applications.
 	CodexCodeCushman001 = "code-cushman-001"
 
-	TextDavinciEdit001 = "text-davinci-edit-001"
+	TextDavinciEdit001       = "text-davinci-edit-001"
+	TextSimilarityBabbage001 = "text-similarity-babbage-001"
 )
 
 // While Davinci is generally the most capable, the other models can perform certain tasks
