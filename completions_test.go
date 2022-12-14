@@ -66,7 +66,7 @@ func TestRequestCompletion(t *testing.T) {
 				TopP:        1,
 				N:           1,
 				Stream:      false,
-				LogProbs:    nil,
+				LogProbs:    0,
 				Stop:        "\n",
 			}
 			completionResp, err := c.RequestCompletion(context.TODO(), cReq)

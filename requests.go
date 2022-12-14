@@ -47,7 +47,7 @@ type CompletionRequest struct {
 	//the logprob of the sampled token, so there may be up to logprobs+1 elements in the response.
 	//
 	// The maximum value for logprobs is 5. If you need more than this, please contact us through our Help center and describe your use case.
-	LogProbs *int `json:"logprobs,omitempty"`
+	LogProbs int `json:"logprobs,omitempty"`
 
 	// Echo back the prompt in addition to the completion
 	Echo bool `json:"echo,omitempty"`
