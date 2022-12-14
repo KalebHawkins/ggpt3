@@ -11,57 +11,57 @@ type CompletionRequest struct {
 	//
 	// Note that <|endoftext|> is the document separator that the model sees during training,
 	// so if a prompt is not specified the model will generate as if from the beginning of a new document.
-	Prompt string `json:"prompt"`
+	Prompt string `json:"prompt,omitempty"`
 
 	// The suffix that comes after a completion of inserted text.
-	Suffix string `json:"suffix"`
+	Suffix string `json:"suffix,omitempty"`
 
 	// The maximum number of tokens to generate in the completion.
 	//
 	// The token count of your prompt plus max_tokens cannot exceed the model's context length.
 	// Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
-	MaxTokens int `json:"max_tokens"`
+	MaxTokens int `json:"max_tokens,omitempty"`
 
 	// What sampling temperature to use. Higher values means the model will take more risks.
 	// Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer.
 	//
 	// It is generally recommended to alter this or `top_p` but not both.
-	Temperature float64 `json:"temperature"`
+	Temperature float64 `json:"temperature,omitempty"`
 
 	// An alternative to sampling with temperature, called nucleus sampling,
 	// where the model considers the results of the tokens with top_p probability mass.
 	// So 0.1 means only the tokens comprising the top 10% probability mass are considered.
 	//
 	// It is generally recommended to alter this or `tempature` but not both.
-	TopP float64 `json:"top_p"`
+	TopP float64 `json:"top_p,omitempty"`
 
 	// How many completions to generate for each prompt.
-	N int `json:"n"`
+	N int `json:"n,omitempty"`
 
 	// Whether to stream back partial progress. If set, tokens will
 	// be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message.
-	Stream bool `json:"stream"`
+	Stream bool `json:"stream,omitempty"`
 
 	// Include the log probabilities on the logprobs most likely tokens, as well the chosen tokens. For example,
 	// if logprobs is 5, the API will return a list of the 5 most likely tokens. The API will always return
 	//the logprob of the sampled token, so there may be up to logprobs+1 elements in the response.
 	//
 	// The maximum value for logprobs is 5. If you need more than this, please contact us through our Help center and describe your use case.
-	LogProbs *int `json:"logprobs"`
+	LogProbs *int `json:"logprobs,omitempty"`
 
 	// Echo back the prompt in addition to the completion
-	Echo bool `json:"echo"`
+	Echo bool `json:"echo,omitempty"`
 
 	// Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
-	Stop string `json:"stop"`
+	Stop string `json:"stop,omitempty"`
 
 	// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether
 	// they appear in the text so far, increasing the model's likelihood to talk about new topics.
-	PresencePenalty float64 `json:"presence_penalty"`
+	PresencePenalty float64 `json:"presence_penalty,omitempty"`
 
 	// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency
 	// in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
-	FrequencyPenalty float64 `json:"frequency_penalty"`
+	FrequencyPenalty float64 `json:"frequency_penalty,omitempty"`
 
 	// Generates best_of completions server-side and returns the "best" (the one with the highest log probability per token).
 	// Results cannot be streamed.
@@ -71,7 +71,7 @@ type CompletionRequest struct {
 	//
 	// Note: Because this parameter generates many completions, it can quickly consume your token quota.
 	// Use carefully and ensure that you have reasonable settings for max_tokens and stop.
-	BestOf int `json:"best_of"`
+	BestOf int `json:"best_of,omitempty"`
 
 	// Modify the likelihood of specified tokens appearing in the completion.
 	//
@@ -83,10 +83,10 @@ type CompletionRequest struct {
 	// selection; values like -100 or 100 should result in a ban or exclusive selection of the relevant token.
 	//
 	// As an example, you can pass {"50256": -100} to prevent the <|endoftext|> token from being generated.
-	LogitBias map[string]int `json:"logit_bias"`
+	LogitBias map[string]int `json:"logit_bias,omitempty"`
 
 	// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
-	User string `json:"user"`
+	User string `json:"user,omitempty"`
 }
 
 // EditsRequest represents a request for edits.
