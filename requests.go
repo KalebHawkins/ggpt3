@@ -26,7 +26,7 @@ type CompletionRequest struct {
 	// Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer.
 	//
 	// It is generally recommended to alter this or `top_p` but not both.
-	Temperature float64 `json:"tempature"`
+	Temperature float64 `json:"temperature"`
 
 	// An alternative to sampling with temperature, called nucleus sampling,
 	// where the model considers the results of the tokens with top_p probability mass.
