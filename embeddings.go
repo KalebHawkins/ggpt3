@@ -6,7 +6,10 @@ import (
 )
 
 func (c *Client) RequestEmbedding(ctx context.Context, er *EmbeddingRequest) (*EmbeddingsResponse, error) {
-	req, err := c.newRequest(ctx, http.MethodPost, nil, "/embeddings", er)
+	headers := make(http.Header)
+	headers.Set("Content-Type", "application/json; charset=utf-8")
+
+	req, err := c.newRequest(ctx, http.MethodPost, headers, "/embeddings", er)
 	if err != nil {
 		return nil, err
 	}

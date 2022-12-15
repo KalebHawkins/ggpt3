@@ -44,10 +44,6 @@ func (c *Client) sendRequest(req *http.Request, v interface{}) error {
 	req.Header.Set("Accept", "application/json; charset=utf-8")
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.apiKey))
 
-	if req.Header.Get("Content-Type") == "" {
-		req.Header.Set("Content-Type", "application/json; charset=utf8")
-	}
-
 	if c.orgId != "" {
 		req.Header.Set("OpenAI-Organization", c.orgId)
 	}
@@ -94,12 +90,14 @@ func (c *Client) newRequest(ctx context.Context, httpMethod string, httpHeaders 
 		contentType := req.Header.Get("Content-Type")
 		switch contentType {
 		case "application/json":
+		case "application/json; charset=utf-8":
 			reqBody, err := json.Marshal(body)
 			if err != nil {
 				return nil, err
 			}
 			req.Body = io.NopCloser(bytes.NewBuffer(reqBody))
 		case "multipart/form-data":
+			fmt.Printf("contentType: %v\n", contentType)
 			fd, ct, err := c.newMultiPartForm(body.(*ImageRequest))
 			if err != nil {
 				return nil, err

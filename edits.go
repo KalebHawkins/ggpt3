@@ -6,7 +6,10 @@ import (
 )
 
 func (c *Client) RequestEdits(ctx context.Context, er *EditsRequest) (*EditsResponse, error) {
-	req, err := c.newRequest(ctx, http.MethodPost, nil, "/edits", er)
+	headers := make(http.Header)
+	headers.Set("Content-Type", "application/json; charset=utf-8")
+
+	req, err := c.newRequest(ctx, http.MethodPost, headers, "/edits", er)
 	if err != nil {
 		return nil, err
 	}
