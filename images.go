@@ -7,7 +7,10 @@ import (
 )
 
 func (c *Client) RequestImages(ctx context.Context, ir *ImageRequest) (*ImageResponse, error) {
-	req, err := c.newRequest(ctx, http.MethodPost, nil, "/images/generations", ir)
+	headers := make(http.Header)
+	headers.Set("Content-Type", "application/json; charset=utf-8")
+
+	req, err := c.newRequest(ctx, http.MethodPost, headers, "/images/generations", ir)
 	if err != nil {
 		return nil, err
 	}

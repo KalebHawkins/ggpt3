@@ -96,52 +96,52 @@ type EditsRequest struct {
 	Model string `json:"model"`
 
 	// The input text to use as a starting point for the edit.
-	Input string `json:"input"`
+	Input string `json:"input,omitempty"`
 
 	// The instruction that tells the model how to edit the prompt.
 	Instruction string `json:"instruction"`
 
 	// How many edits to generate for the input and instruction.
-	N int `json:"n"`
+	N int `json:"n,omitempty"`
 
 	// What sampling temperature to use. Higher values means the model will take more risks.
 	// Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer.
 	//
 	// We generally recommend altering this or `top_p` but not both.
-	Temperature float64 `json:"temperature"`
+	Temperature float64 `json:"temperature,omitempty"`
 
 	// An alternative to sampling with temperature, called nucleus sampling,
 	// where the model considers the results of the tokens with top_p probability mass.
 	// So 0.1 means only the tokens comprising the top 10% probability mass are considered.
 	//
 	// We generally recommend altering this or `temperature` but not both.
-	TopP float64 `json:"top_p"`
+	TopP float64 `json:"top_p,omitempty"`
 }
 
 // ImageRequest represent a request body for the image endpoint.
 type ImageRequest struct {
 	// The image to edit. Must be a valid PNG file, less than 4MB, and square.
 	// If mask is not provided, image must have transparency, which will be used as the mask.
-	Image string `json:"image"`
+	Image string `json:"image,omitempty"`
 
 	// An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where
 	// image should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as image.
-	Mask string `json:"mask"`
+	Mask string `json:"mask,omitempty"`
 
 	// A text description of the desired image(s). The maximum length is 1000 characters.
-	Prompt string `json:"prompt"`
+	Prompt string `json:"prompt,omitempty"`
 
 	// The number of images to generate. Must be between 1 and 10.
-	N int `json:"n"`
+	N int `json:"n,omitempty"`
 
 	// The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024
-	Size string `json:"size"`
+	Size string `json:"size,omitempty"`
 
 	// The format in which the generated images are returned. Must be one of url or b64_json.
-	ResponseFormat string `json:"response_format"`
+	ResponseFormat string `json:"response_format,omitempty"`
 
 	// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
-	User string `json:"user"`
+	User string `json:"user,omitempty"`
 }
 
 // EmbeddingRequest represent a request body for the embeddings endpoint.
@@ -158,5 +158,5 @@ type EmbeddingRequest struct {
 	Input []string `json:"input"`
 
 	// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
-	User string `json:"user"`
+	User string `json:"user,omitempty"`
 }
